@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translation file for Ticket System (Russian)
+# Copyright (C) 2025 Your Name
+# This file is distributed under the same license as the Ticket System package.
+# Your Name <your.email@example.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Ticket System 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-07 21:07+0500\n"
+"PO-Revision-Date: 2025-05-12 12:00+0500\n"
+"Last-Translator: Your Name <your.email@example.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\core\models.py:6
+msgid "email address"
+msgstr "Адрес электронной почты"
+
+#: .\core\models.py:8
+msgid "preferred language"
+msgstr "Предпочитаемый язык"
+
+#: .\core\models.py:18
+msgid "title"
+msgstr "Название"
+
+#: .\core\models.py:19
+msgid "description"
+msgstr "Описание"
+
+#: .\core\models.py:20
+msgid "event date"
+msgstr "Дата события"
+
+#: .\core\models.py:21
+msgid "location"
+msgstr "Место проведения"
+
+#: .\core\models.py:22 .\core\models.py:36
+msgid "created at"
+msgstr "Создано"
+
+#: .\core\models.py:28
+msgid "event"
+msgstr "Событие"
+
+#: .\core\models.py:29
+msgid "events"
+msgstr "События"
+
+#: .\core\models.py:33
+msgid "price"
+msgstr "Цена"
+
+#: .\core\models.py:34
+msgid "seat number"
+msgstr "Номер места"
+
+#: .\core\models.py:35
+msgid "is sold"
+msgstr "Продано"
+
+#: .\core\models.py:42
+msgid "ticket"
+msgstr "Билет"
+
+#: .\core\models.py:43
+msgid "tickets"
+msgstr "Билеты"
+
+#: .\core\models.py:48
+msgid "purchase date"
+msgstr "Дата покупки"
+
+#: .\core\models.py:50
+msgid "payment status"
+msgstr "Статус платежа"
+
+#: .\core\models.py:56
+msgid "payment method"
+msgstr "Способ оплаты"
+
+#: .\core\models.py:66
+msgid "purchase"
+msgstr "Покупка"
+
+#: .\core\models.py:67
+msgid "purchases"
+msgstr "Покупки"
+
+#: .\templates\core\home.html:5
+msgid "Ticket System"
+msgstr "Система покупки билетов"
+
+#: .\templates\core\home.html:8
+msgid "Welcome to Ticket System"
+msgstr "Добро пожаловать в систему покупки билетов"
+
+#: .\templates\core\home.html:9
+msgid "Language"
+msgstr "Язык"
+
+#: .\templates\core\home.html:10
+msgid "Admin Panel"
+msgstr "Панель администратора"
+
+#: .\templates\core\home.html:11
+msgid "View Events API"
+msgstr "Посмотреть API событий"
