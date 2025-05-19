@@ -1,0 +1,31 @@
+.event-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.event-page img {
+  max-width: 100%;
+  height: auto;
+}
+
+.event-details {
+  margin: 20px 0;
+}
+
+.tickets ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tickets li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tickets a {
+  margin-left: 10px;
+  color: #007bff;
+  text-decoration: none;
+}

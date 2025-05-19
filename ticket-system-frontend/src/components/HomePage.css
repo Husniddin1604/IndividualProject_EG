@@ -1,0 +1,65 @@
+.home-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.language-switcher button {
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.categories {
+  margin: 20px 0;
+}
+
+.category-list a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.events {
+  margin: 20px 0;
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.event-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.event-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.banner {
+  background: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+}

@@ -1,0 +1,557 @@
+[
+    {
+        "model": "core.user",
+        "pk": 1,
+        "fields": {
+            "username": "testuser1",
+            "email": "user1@example.com",
+            "password": "pbkdf2_sha256$600000$randomsalt$hashedpassword",
+            "phone_number": "+998901234567",
+            "address": "Tashkent, Chilanzar, 45A",
+            "preferred_language": "ru",
+            "is_organizer": false
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 2,
+        "fields": {
+            "username": "organizer1",
+            "email": "org1@example.com",
+            "password": "pbkdf2_sha256$600000$randomsalt$hashedpassword",
+            "phone_number": "+998912345678",
+            "address": "Samarkand, Registan St, 10",
+            "preferred_language": "uz",
+            "is_organizer": true
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 3,
+        "fields": {
+            "username": "testuser2",
+            "email": "user2@example.com",
+            "password": "pbkdf2_sha256$600000$randomsalt$hashedpassword",
+            "phone_number": "+998923456789",
+            "address": "Bukhara, Lyabi Hauz, 5",
+            "preferred_language": "en",
+            "is_organizer": false
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 4,
+        "fields": {
+            "username": "testuser3",
+            "email": "user3@example.com",
+            "password": "pbkdf2_sha256$600000$randomsalt$hashedpassword",
+            "phone_number": "+998934567890",
+            "address": "Fergana, Al-Fargʻoniy St, 12",
+            "preferred_language": "uz",
+            "is_organizer": false
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 5,
+        "fields": {
+            "username": "organizer2",
+            "email": "org2@example.com",
+            "password": "pbkdf2_sha256$600000$randomsalt$hashedpassword",
+            "phone_number": "+998945678901",
+            "address": "Tashkent, Mirzo Ulugbek, 7",
+            "preferred_language": "ru",
+            "is_organizer": true
+        }
+    },
+    {
+        "model": "core.venue",
+        "pk": 1,
+        "fields": {
+            "name": "Tashkent Arena",
+            "address": "123 Chilanzar St, Tashkent",
+            "city": "Tashkent",
+            "country": "Uzbekistan",
+            "capacity": 8000,
+            "seating_chart": {"sectors": ["A", "B", "C"], "rows": 30}
+        }
+    },
+    {
+        "model": "core.venue",
+        "pk": 2,
+        "fields": {
+            "name": "Navoi Theater",
+            "address": "28 Ataturk St, Tashkent",
+            "city": "Tashkent",
+            "country": "Uzbekistan",
+            "capacity": 1500,
+            "seating_chart": {"sectors": ["Parter", "Balcony"], "rows": 20}
+        }
+    },
+    {
+        "model": "core.venue",
+        "pk": 3,
+        "fields": {
+            "name": "Registan Square",
+            "address": "Registan St, Samarkand",
+            "city": "Samarkand",
+            "country": "Uzbekistan",
+            "capacity": 10000,
+            "seating_chart": {"sectors": ["Open Area"], "rows": 0}
+        }
+    },
+    {
+        "model": "core.venue",
+        "pk": 4,
+        "fields": {
+            "name": "Bukhara Amphitheater",
+            "address": "1 Lyabi Hauz St, Bukhara",
+            "city": "Bukhara",
+            "country": "Uzbekistan",
+            "capacity": 2000,
+            "seating_chart": {"sectors": ["Main"], "rows": 15}
+        }
+    },
+    {
+        "model": "core.venue",
+        "pk": 5,
+        "fields": {
+            "name": "Fergana Stadium",
+            "address": "50 Al-Fargʻoniy St, Fergana",
+            "city": "Fergana",
+            "country": "Uzbekistan",
+            "capacity": 12000,
+            "seating_chart": {"sectors": ["East", "West"], "rows": 40}
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 1,
+        "fields": {
+            "name": "Concert",
+            "description": "Live music performances"
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 2,
+        "fields": {
+            "name": "Theater",
+            "description": "Theatrical performances"
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 3,
+        "fields": {
+            "name": "Festival",
+            "description": "Cultural and music festivals"
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 4,
+        "fields": {
+            "name": "Sport",
+            "description": "Sporting events"
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 5,
+        "fields": {
+            "name": "Exhibition",
+            "description": "Art and cultural exhibitions"
+        }
+    },
+    {
+        "model": "core.organizer",
+        "pk": 1,
+        "fields": {
+            "user": 2,
+            "name": "Uzbek Events Co",
+            "description": "Leading event organizer in Uzbekistan"
+        }
+    },
+    {
+        "model": "core.organizer",
+        "pk": 2,
+        "fields": {
+            "user": 5,
+            "name": "Tashkent Cultural Group",
+            "description": "Organizing cultural events in Tashkent"
+        }
+    },
+    {
+        "model": "core.event",
+        "pk": 1,
+        "fields": {
+            "title": "Rock Concert 2025",
+            "description": "International rock bands live in Tashkent",
+            "date": "2025-06-01T19:00:00Z",
+            "venue": 1,
+            "organizer": 1,
+            "status": "active",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.event",
+        "pk": 2,
+        "fields": {
+            "title": "Aida Opera",
+            "description": "Classic opera by Giuseppe Verdi",
+            "date": "2025-06-10T18:00:00Z",
+            "venue": 2,
+            "organizer": 1,
+            "status": "active",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.event",
+        "pk": 3,
+        "fields": {
+            "title": "Samarkand Music Festival",
+            "description": "Annual cultural festival in Registan",
+            "date": "2025-07-15T16:00:00Z",
+            "venue": 3,
+            "organizer": 1,
+            "status": "active",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.event",
+        "pk": 4,
+        "fields": {
+            "title": "Bukhara Art Exhibition",
+            "description": "Showcasing local artists",
+            "date": "2025-06-20T10:00:00Z",
+            "venue": 4,
+            "organizer": 2,
+            "status": "active",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.event",
+        "pk": 5,
+        "fields": {
+            "title": "Fergana Football Match",
+            "description": "Local teams championship",
+            "date": "2025-06-25T17:00:00Z",
+            "venue": 5,
+            "organizer": 2,
+            "status": "active",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.event",
+        "pk": 6,
+        "fields": {
+            "title": "Tashkent Jazz Night",
+            "description": "Live jazz performances",
+            "date": "2025-07-01T20:00:00Z",
+            "venue": 1,
+            "organizer": 1,
+            "status": "active",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.event_categories",
+        "pk": 1,
+        "fields": {
+            "event": 1,
+            "category": 1
+        }
+    },
+    {
+        "model": "core.event_categories",
+        "pk": 2,
+        "fields": {
+            "event": 2,
+            "category": 2
+        }
+    },
+    {
+        "model": "core.event_categories",
+        "pk": 3,
+        "fields": {
+            "event": 3,
+            "category": 3
+        }
+    },
+    {
+        "model": "core.event_categories",
+        "pk": 4,
+        "fields": {
+            "event": 4,
+            "category": 5
+        }
+    },
+    {
+        "model": "core.event_categories",
+        "pk": 5,
+        "fields": {
+            "event": 5,
+            "category": 4
+        }
+    },
+    {
+        "model": "core.event_categories",
+        "pk": 6,
+        "fields": {
+            "event": 6,
+            "category": 1
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 1,
+        "fields": {
+            "event": 1,
+            "ticket_type": "standard",
+            "price": "100000.00",
+            "sector": "A",
+            "row": "12",
+            "seat_number": "A12",
+            "is_sold": false,
+            "qr_code": "TICKET_001",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 2,
+        "fields": {
+            "event": 1,
+            "ticket_type": "vip",
+            "price": "250000.00",
+            "sector": "A",
+            "row": "1",
+            "seat_number": "A01",
+            "is_sold": false,
+            "qr_code": "TICKET_002",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 3,
+        "fields": {
+            "event": 2,
+            "ticket_type": "standard",
+            "price": "80000.00",
+            "sector": "Parter",
+            "row": "5",
+            "seat_number": "P05",
+            "is_sold": true,
+            "qr_code": "TICKET_003",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 4,
+        "fields": {
+            "event": 3,
+            "ticket_type": "general",
+            "price": "50000.00",
+            "sector": "Open Area",
+            "row": "",
+            "seat_number": "",
+            "is_sold": false,
+            "qr_code": "TICKET_004",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 5,
+        "fields": {
+            "event": 1,
+            "ticket_type": "standard",
+            "price": "100000.00",
+            "sector": "B",
+            "row": "15",
+            "seat_number": "B15",
+            "is_sold": true,
+            "qr_code": "TICKET_005",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 6,
+        "fields": {
+            "event": 4,
+            "ticket_type": "standard",
+            "price": "30000.00",
+            "sector": "Main",
+            "row": "3",
+            "seat_number": "M03",
+            "is_sold": false,
+            "qr_code": "TICKET_006",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 7,
+        "fields": {
+            "event": 5,
+            "ticket_type": "standard",
+            "price": "60000.00",
+            "sector": "East",
+            "row": "10",
+            "seat_number": "E10",
+            "is_sold": false,
+            "qr_code": "TICKET_007",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 8,
+        "fields": {
+            "event": 5,
+            "ticket_type": "vip",
+            "price": "150000.00",
+            "sector": "West",
+            "row": "2",
+            "seat_number": "W02",
+            "is_sold": false,
+            "qr_code": "TICKET_008",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 9,
+        "fields": {
+            "event": 6,
+            "ticket_type": "standard",
+            "price": "120000.00",
+            "sector": "C",
+            "row": "8",
+            "seat_number": "C08",
+            "is_sold": false,
+            "qr_code": "TICKET_009",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.ticket",
+        "pk": 10,
+        "fields": {
+            "event": 6,
+            "ticket_type": "child",
+            "price": "60000.00",
+            "sector": "C",
+            "row": "9",
+            "seat_number": "C09",
+            "is_sold": false,
+            "qr_code": "TICKET_010",
+            "created_at": "2025-05-19T12:00:00Z"
+        }
+    },
+    {
+        "model": "core.purchase",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "total_amount": "180000.00",
+            "purchase_date": "2025-05-19T12:00:00Z",
+            "payment_status": "completed",
+            "payment_method": "payme",
+            "delivery_method": "electronic"
+        }
+    },
+    {
+        "model": "core.purchase",
+        "pk": 2,
+        "fields": {
+            "user": 3,
+            "total_amount": "250000.00",
+            "purchase_date": "2025-05-19T12:00:00Z",
+            "payment_status": "pending",
+            "payment_method": "stripe",
+            "delivery_method": "electronic"
+        }
+    },
+    {
+        "model": "core.purchase",
+        "pk": 3,
+        "fields": {
+            "user": 4,
+            "total_amount": "30000.00",
+            "purchase_date": "2025-05-19T12:00:00Z",
+            "payment_status": "completed",
+            "payment_method": "payme",
+            "delivery_method": "electronic"
+        }
+    },
+    {
+        "model": "core.purchase",
+        "pk": 4,
+        "fields": {
+            "user": 1,
+            "total_amount": "210000.00",
+            "purchase_date": "2025-05-19T12:00:00Z",
+            "payment_status": "failed",
+            "payment_method": "stripe",
+            "delivery_method": "electronic"
+        }
+    },
+    {
+        "model": "core.purchase_tickets",
+        "pk": 1,
+        "fields": {
+            "purchase": 1,
+            "ticket": 3
+        }
+    },
+    {
+        "model": "core.purchase_tickets",
+        "pk": 2,
+        "fields": {
+            "purchase": 1,
+            "ticket": 5
+        }
+    },
+    {
+        "model": "core.purchase_tickets",
+        "pk": 3,
+        "fields": {
+            "purchase": 2,
+            "ticket": 2
+        }
+    },
+    {
+        "model": "core.purchase_tickets",
+        "pk": 4,
+        "fields": {
+            "purchase": 3,
+            "ticket": 6
+        }
+    },
+    {
+        "model": "core.purchase_tickets",
+        "pk": 5,
+        "fields": {
+            "purchase": 4,
+            "ticket": 7
+        }
+    },
+    {
+        "model": "core.purchase_tickets",
+        "pk": 6,
+        "fields": {
+            "purchase": 4,
+            "ticket": 8
+        }
+    }
+]

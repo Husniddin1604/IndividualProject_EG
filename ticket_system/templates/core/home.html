@@ -3,29 +3,77 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
-    <title>{% trans "Ticket System" %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Ticket System Backend" %}</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        select, button { padding: 8px; margin-right: 10px; }
-        a { margin-right: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        .api-links, .admin-links {
+            margin: 20px 0;
+        }
+        .api-links a, .admin-links a {
+            display: block;
+            margin: 5px 0;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .api-links a:hover, .admin-links a:hover {
+            text-decoration: underline;
+        }
+        .events-list {
+            margin-top: 30px;
+        }
+        .events-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .events-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
     </style>
 </head>
 <body>
-    <h1>{% trans "Welcome to Ticket System" %}</h1>
-    <form action="{% url 'set_language' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <select name="language" onchange="this.form.submit()">
-            {% get_language_info_list for LANGUAGES as languages %}
-            {% for lang in languages %}
-                <option value="{{ lang.code }}" {% if lang.code == LANGUAGE_CODE %}selected{% endif %}>
-                    {{ lang.name_local }}
-                </option>
-            {% endfor %}
-        </select>
-    </form>
-    <p>{% trans "Language" %}: {{ LANGUAGE_CODE }} </p>
-    <a href="{% url 'admin:index' %}">{% trans "Admin Panel" %}</a>
-    <a href="/api/events/">{% trans "View Events API" %}</a>
+    <h1>{% trans "Ticket System Backend Interface" %}</h1>
+    <p>{% trans "Language" %}: {{ LANGUAGE_CODE }}</p>
+
+    <div class="admin-links">
+        <h2>{% trans "Administration" %}</h2>
+        <a href="{% url 'admin:index' %}">{% trans "Django Admin Panel" %}</a>
+    </div>
+
+    <div class="api-links">
+        <h2>{% trans "API Endpoints" %}</h2>
+        <a href="{% url 'schema-swagger-ui' %}">{% trans "API Documentation (Swagger)" %}</a>
+        <a href="/api/venues/">{% trans "Venues" %}</a>
+        <a href="/api/categories/">{% trans "Categories" %}</a>
+        <a href="/api/organizers/">{% trans "Organizers" %}</a>
+        <a href="/api/events/">{% trans "Events" %}</a>
+        <a href="/api/tickets/">{% trans "Tickets" %}</a>
+        <a href="/api/purchases/">{% trans "Purchases" %}</a>
+        <a href="/api/get-csrf/">{% trans "CSRF Token" %}</a>
+    </div>
+
+    <div class="events-list">
+        <h2>{% trans "Active Events" %}</h2>
+        {% if events %}
+            <ul>
+                {% for event in events %}
+                    <li>
+                        {{ event.title }} - {{ event.venue.name }} - {{ event.date|date:"Y-m-d H:i" }}
+                        (Status: {{ event.status }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{% trans "No active events available." %}</p>
+        {% endif %}
+    </div>
 </body>
 </html>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'drf_yasg',
     'corsheaders',
     'core',
 ]
@@ -135,6 +136,9 @@ TIME_ZONE = 'Asia/Tashkent'
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -166,6 +170,21 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='your-email-password
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
+CORS_ALLOW_HEADERS = ['Content-Type', 'X-CSRFToken']
+
+# CSRF settings
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+]
+
+# Session and middleware settings
+CSRF_COOKIE_SAMESITE = 'Lax'  # Избегаем SameSite=None
+CSRF_COOKIE_SECURE = False    # Для локальной разработки
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = False
 
 # Logging errors
 LOGGING = {

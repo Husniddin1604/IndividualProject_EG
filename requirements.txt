@@ -7,3 +7,4 @@ stripe==8.7.0
 python-decouple==3.8
 django-cors-headers==4.3.1
 gunicorn==22.0.0
+drf-yasg~=1.21.10
