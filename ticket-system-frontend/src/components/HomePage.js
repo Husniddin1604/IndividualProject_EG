@@ -1,93 +1,120 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../axiosConfig';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './HomePage.css';
 
 const HomePage = () => {
   const [events, setEvents] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [search, setSearch] = useState('');
-  const [language, setLanguage] = useState('ru');
+  const [searchInput, setSearchInput] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
-  // Загрузка событий и категорий
   useEffect(() => {
-    // Получить активные события
-    axios.get('http://127.0.0.1:8080/api/events/?status=active')
-      .then(response => setEvents(response.data.slice(0, 6))) // Первые 6 событий
-      .catch(error => console.error('Error fetching events:', error));
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
 
-    // Получить категории
-    axios.get('http://127.0.0.1:8080/api/categories/')
-      .then(response => setCategories(response.data))
-      .catch(error => console.error('Error fetching categories:', error));
-  }, []);
+        const [eventsResponse, categoriesResponse] = await Promise.all([
+          axios.get('http://127.0.0.1:8080/api/events/?status=active'),
+          axios.get('http://127.0.0.1:8080/api/categories/')
+        ]);
 
-  // Смена языка
-  const handleLanguageChange = (lang) => {
-    axios.post('http://127.0.0.1:8080/i18n/setlang/', { language: lang })
-      .then(() => setLanguage(lang))
-      .catch(error => console.error('Error setting language:', error));
+        setEvents(eventsResponse.data.results || eventsResponse.data);
+        setCategories(categoriesResponse.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError(t('errorLoadingData'));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [t]);
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
   };
 
-  // Поиск событий
   const filteredEvents = events.filter(event =>
-    event.title.toLowerCase().includes(search.toLowerCase())
+    event.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+    event.description.toLowerCase().includes(searchInput.toLowerCase())
   );
+
+  if (isLoading) {
+    return (
+      <div className="home-page">
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+          <p>{t('loading')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="home-page">
+        <div className="error-message">{error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="home-page">
-      <header>
-        <h1>Ticket System</h1>
-        <div className="language-switcher">
-          <button onClick={() => handleLanguageChange('ru')}>RU</button>
-          <button onClick={() => handleLanguageChange('en')}>EN</button>
-          <button onClick={() => handleLanguageChange('uz')}>UZ</button>
-        </div>
-        <nav>
-          <Link to="/login">Вход</Link>
-          <Link to="/register">Регистрация</Link>
-          <Link to="/profile">Профиль</Link>
-        </nav>
-      </header>
+      <h1>{t('welcome')}</h1>
 
-      <section className="search">
+      <div className="search">
         <input
           type="text"
-          placeholder={language === 'ru' ? 'Поиск событий...' : language === 'en' ? 'Search events...' : 'Tadbirlar qidirish...'}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          placeholder={t('searchPlaceholder')}
+          value={searchInput}
+          onChange={handleSearch}
+          aria-label={t('searchPlaceholder')}
         />
-      </section>
+      </div>
 
-      <section className="categories">
-        <h2>{language === 'ru' ? 'Категории' : language === 'en' ? 'Categories' : 'Kategoriyalar'}</h2>
+      <div className="categories">
+        <h2>{t('categories')}</h2>
         <div className="category-list">
           {categories.map(category => (
-            <Link key={category.id} to={`/events?category=${category.id}`}>
+            <Link
+              key={category.id}
+              to={`/events?category=${category.id}`}
+              aria-label={`${t('showEventsInCategory')} ${category.name}`}
+            >
               {category.name}
             </Link>
           ))}
         </div>
-      </section>
+      </div>
 
-      <section className="events">
-        <h2>{language === 'ru' ? 'Популярные события' : language === 'en' ? 'Popular Events' : 'Mashhur Tadbirlar'}</h2>
+      <div className="events">
+        <h2>{t('popularEvents')}</h2>
         <div className="event-list">
           {filteredEvents.map(event => (
             <div key={event.id} className="event-card">
-              <img src={event.image || 'placeholder.jpg'} alt={event.title} />
-              <h3>{event.title}</h3>
-              <p>{event.date}</p>
-              <p>{event.venue.name}</p>
-              <Link to={`/events/${event.id}`}>Подробнее</Link>
+              <img src={event.image || '/placeholder.jpg'} alt={event.title} />
+              <div className="event-card-content">
+                <h3>{event.title}</h3>
+                <p>{new Date(event.date).toLocaleDateString()}</p>
+                <p>{event.venue.name}, {event.venue.city}</p>
+                <Link to={`/events/${event.id}`}>{t('details')}</Link>
+              </div>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
-      <section className="banner">
-        <h2>{language === 'ru' ? 'Скидка 10% на первое событие!' : language === 'en' ? '10% off your first event!' : 'Birinchi tadbirda 10% chegirma!'}</h2>
-      </section>
+      <div className="banner">
+        <h2>{t('bannerTitle')}</h2>
+        <p>{t('bannerSubtitle')}</p>
+        <Link to="/events" className="banner-button">{t('viewAllEvents')}</Link>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,4 @@
+ERROR 2025-05-22 02:24:40,278 views 14192 7404 Registration error: Manager isn't available; 'auth.User' has been swapped for 'core.User'
+ERROR 2025-05-22 02:46:25,843 views 19076 12724 Registration error: Manager isn't available; 'auth.User' has been swapped for 'core.User'
+ERROR 2025-05-22 02:47:36,680 views 17064 18300 Registration error: Manager isn't available; 'auth.User' has been swapped for 'core.User'
+ERROR 2025-05-22 02:48:52,341 views 19336 19188 Registration error: Manager isn't available; 'auth.User' has been swapped for 'core.User'

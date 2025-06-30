@@ -1,15 +1,35 @@
 from rest_framework import serializers
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from core.models import User, Venue, Category, Organizer, Event, Ticket, Purchase
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True, required=True)
+    confirm_password = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'phone_number', 'address', 'preferred_language', 'is_organizer']
+        fields = ['id', 'username', 'email', 'password', 'confirm_password', 
+                 'phone_number', 'address', 'preferred_language', 'is_organizer']
         read_only_fields = ['id', 'is_organizer']
 
+    def validate_password(self, value):
+        try:
+            validate_password(value)
+        except ValidationError as e:
+            raise serializers.ValidationError(list(e.messages))
+        return value
+
+    def validate(self, data):
+        if 'password' in data and 'confirm_password' in data:
+            if data['password'] != data['confirm_password']:
+                raise serializers.ValidationError({
+                    'confirm_password': 'Passwords do not match'
+                })
+        return data
+
     def create(self, validated_data):
+        validated_data.pop('confirm_password', None)
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
@@ -36,21 +56,27 @@ class OrganizerSerializer(serializers.ModelSerializer):
         model = Organizer
         fields = ['id', 'name', 'user']
 
+class TicketSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source='ticket_type')  # Маппинг ticket_type → name
+    event_title = serializers.CharField(source='event.title', read_only=True)  # Для ProfilePage
+
+    class Meta:
+        model = Ticket
+        fields = ['id', 'name', 'event_title', 'price', 'sector', 'row', 'seat_number', 'is_sold', 'qr_code', 'created_at']
+
 class EventSerializer(serializers.ModelSerializer):
     venue = VenueSerializer(read_only=True)
     categories = CategorySerializer(many=True, read_only=True)
     organizer = OrganizerSerializer(read_only=True)
+    tickets = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
-        fields = ['id', 'title', 'description', 'date', 'venue', 'categories', 'organizer', 'image', 'status', 'created_at']
+        fields = ['id', 'title', 'description', 'date', 'venue', 'categories', 'organizer', 'image', 'status', 'created_at', 'tickets']
 
-class TicketSerializer(serializers.ModelSerializer):
-    event = EventSerializer(read_only=True)
-
-    class Meta:
-        model = Ticket
-        fields = ['id', 'event', 'ticket_type', 'price', 'sector', 'row', 'seat_number', 'is_sold', 'qr_code', 'created_at']
+    def get_tickets(self, obj):
+        tickets = obj.tickets.filter(is_sold=False)  # Только непроданные билеты
+        return TicketSerializer(tickets, many=True).data
 
 class PurchaseSerializer(serializers.ModelSerializer):
     tickets = TicketSerializer(many=True, read_only=True)
